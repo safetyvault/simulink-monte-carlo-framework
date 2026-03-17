@@ -1,5 +1,5 @@
 # SafetyVault Monte Carlo Framework — FREE VERSION v1.0
-**Upgrade to Paid:** https://safetyvault.gumroad.com
+**Upgrade to Paid:** https://safetyvault.gumroad.com/l/simulink-monte-carlo-framework
 
 > **Monte Carlo Simulation Framework for Simulink — Free Edition**  
 > Seed-based parameter perturbation | HTML reports | Per-repetition plots
@@ -185,7 +185,7 @@ rpt.previewThemes()       % all 12 themes at once
 
 Need unlimited params, unlimited signals, and custom branding?
 
-**https://safetyvault.gumroad.com**
+**https://safetyvault.gumroad.com/l/simulink-monte-carlo-framework**
 
 ---
 
