@@ -1,12 +1,10 @@
-# simulink-monte-carlo-framework
-
-Professional Monte Carlo simulation framework for MATLAB/Simulink — Excel-driven, parsim-ready, HTML reports with 12 themes.
-
 # SafetyVault Monte Carlo Framework — FREE VERSION v1.0
-Upgrade to Paid: https://safetyvault.gumroad.com
+**Upgrade to Paid:** https://safetyvault.gumroad.com
 
-> Monte Carlo Simulation Framework for Simulink — Free Edition
+> **Monte Carlo Simulation Framework for Simulink — Free Edition**  
 > Seed-based parameter perturbation | HTML reports | Per-repetition plots
+
+---
 
 ## Free vs Paid
 
@@ -22,13 +20,19 @@ Upgrade to Paid: https://safetyvault.gumroad.com
 | Per-rep PNG plots | ✅ | ✅ |
 | Distributions | All 4 | All 4 |
 
+---
+
 ## Requirements
+
 - MATLAB R2019b or later
 - Simulink
 - Parallel Computing Toolbox *(optional — for parsim)*
 
+---
+
 ## Quick Start
 
+'''matlab
 % 1. Configure runMCFramework.m
 modelName   = 'YourModel';
 rbtFile     = 'RBT_Tests_v1.0.xlsx';
@@ -37,12 +41,16 @@ reportTheme = 'midnight';
 
 % 2. Run
 runMCFramework
+'''
+
+---
 
 ## What You Need to Provide
 
 ### 1. Your Simulink Model ('.slx')
 - Must have **Inport blocks** for input signals
 - Parameters must be **Constant blocks** with variable names (e.g. 'ANGLE_1')
+- **One-time setup**: run 'setupModelWorkspace.m' once before first use
 
 ### 2. 'RBT_Tests_v1.0.xlsx' — Test Master File
 
@@ -60,7 +68,7 @@ Data starts at **Row 4**:
 | Tolerance% | Tolerance for output check | '5' |
 | Notes | Optional notes | — |
 
-> **Free limit**: Only the first 2 parameters will be perturbed.
+> **Free limit**: Only first 2 parameters will be perturbed.
 
 ### 3. 'Values_Sheet_v1.7.xlsx' — Signal + Parameter Definitions
 
@@ -70,7 +78,7 @@ Time  | FLAP_01 | SPOILER_02 | RUDDER_03
 0     |    0    |     0      |     0
 0.1   |    5    |     0      |     2
 '''
-> **Free limit**: Only the first 4 signals plotted in PNGs.
+> **Free limit**: Only first 4 signals plotted in PNGs.
 
 #### Params Sheet
 '''
@@ -87,12 +95,26 @@ ANGLE_2  | Surface angle |   -5   |    5   |   Uniform    |  deg  |   1    |
 | 'Truncated_Normal' | Bell curve, hard-clamped to bounds — safety-critical |
 | 'Fixed' | No perturbation — freeze this parameter |
 
-> See the **Distribution Guide** tab in 'Values_Sheet.xlsx' for full explanations with examples.
+> See the **Distribution Guide** tab in 'Values_Sheet_v1.7.xlsx' for full explanations with examples.
+
+---
+
+## One-Time Model Setup
+
+'''matlab
+% Run once before first use — saves model automatically
+setupModelWorkspace
+'''
+
+This moves your parameters from 'PreLoadFcn' / base workspace to **Model Workspace**, which is required for 'parsim' + 'setBlockParameter' to work correctly.
+
+---
 
 ## Output — Where Results Are Stored
 
 All outputs saved to 'MC_Results/' (configurable):
 
+'''
 MC_Results/
 ├── SafetyVault_MC_Report.html       ← Open in browser
 ├── plots/
@@ -100,6 +122,7 @@ MC_Results/
 │   ├── TC1_42_rep02.png
 │   └── TC1_42_plots.html            ← Tabbed viewer
 └── TC1_42.mat                       ← Raw MATLAB results
+'''
 
 ### HTML Report Contains:
 - Input signal table per test case
@@ -112,11 +135,14 @@ MC_Results/
 - Output signals — all overlaid with legend + min/max
 - Parameter table — Nominal / Perturbed / Dev% / Distribution
 
+---
+
 ## Configuration ('runMCFramework.m')
 
+'''matlab
 modelName      = 'YourModel';
-rbtFile        = 'RBT_Tests.xlsx';
-valFile        = 'Values_Sheet.xlsx';
+rbtFile        = 'RBT_Tests_v1.0.xlsx';
+valFile        = 'Values_Sheet_v1.7.xlsx';
 resultsDir     = fullfile(pwd, 'MC_Results');
 useParsim      = true;    % parallel execution
 useFastRestart = false;   % keep false
@@ -126,11 +152,15 @@ reportTheme    = 'midnight';
 ### Themes (all 12 available in free version)
 'midnight' | 'obsidian' | 'arctic' | 'forest' | 'crimson' | 'slate' | 'aurora' | 'solar' | 'pearl' | 'cloud' | 'mint' | 'dusk'
 
+---
+
 ## Regenerate Report Without Rerunning
 
+'''matlab
 rpt.generate('arctic')    % different theme — no rerun needed
 rpt.generate('obsidian')
 rpt.previewThemes()       % all 12 themes at once
+'''
 
 ---
 
@@ -146,12 +176,17 @@ rpt.previewThemes()       % all 12 themes at once
 | 'generateReport.m' | Generates HTML report |
 | 'SafetyVaultReport.m' | Report class for theme switching |
 | 'svTheme.m' | 12 colour themes |
-| 'Values_Sheet.xlsx' | Template with Distribution Guide |
-| 'RBT_Tests.xlsx' | Requirement Based Tests |
+| 'setupModelWorkspace.m' | One-time model setup |
+| 'Values_Sheet_v1.7.xlsx' | Template with Distribution Guide |
 
+---
 
 ## Upgrade to Paid
 
 Need unlimited params, unlimited signals, and custom branding?
-https://safetyvault.gumroad.com
+
+**https://safetyvault.gumroad.com**
+
+---
+
 *SafetyVault Monte Carlo Framework — built for safety-critical engineers.*
